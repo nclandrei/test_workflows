@@ -20,6 +20,7 @@ jobs:
           cancel_others: true
 
   run-all-tests:
+    name: Run All Tests
     runs-on: ubuntu-latest
     steps:
       - name: Comment trigger
@@ -34,5 +35,5 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         if: steps.check.outputs.triggered == 'true'
         with:
-          workflow: tests.yml
+          workflow: Frontend Tests
           token: ${{ secrets.SUPER_SECRET }}
