@@ -6,7 +6,20 @@ on:
     types: [created]
 
 jobs:
-  deploy:
+  pre_steps:
+    # Allow to cancel pending workflows if you commit multiple times, for instance.
+    # Pretty useful to save GH Actions minutes.
+    name: Skip if duplicate action
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@master
+        with:
+          cancel_others: true
+
+  run-all-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Comment trigger
@@ -18,7 +31,6 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       - name: Run frontend tests
-        uses: benc-uk/workflow-dispatch@v1
         if: steps.check.outputs.triggered == 'true'
         with:
           workflow: Frontend Tests
