@@ -34,5 +34,5 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         if: steps.check.outputs.triggered == 'true'
         with:
-          workflow: Frontend Tests
+          workflow: tests.yml
           token: ${{ secrets.SUPER_SECRET }}
