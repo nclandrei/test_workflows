@@ -37,3 +37,4 @@ jobs:
         with:
           workflow: Frontend Tests
           token: ${{ secrets.SUPER_SECRET }}
+          inputs: '{ "all_tests": "true" }'

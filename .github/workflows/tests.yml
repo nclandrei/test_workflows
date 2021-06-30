@@ -1,10 +1,18 @@
 name: Frontend Tests
 on:
   workflow_dispatch:
+    inputs:
+      all_tests:
+        description: "Whether all tests should run"
+        required: false
+        default: "false"
 
 jobs:
   say_hi:
     runs-on: ubuntu-latest
     steps:
-      - name: Hi
+      - name: Hi simple
         run: echo "Hi"
+      - name: Hi for all tests
+        if: github.event.inputs.all_tests == 'true'
+        run: echo "Wow such complication"
