@@ -27,7 +27,7 @@ jobs:
         id: check
         uses: khan/pull-request-comment-trigger@master
         with:
-          trigger: "/run-all-tests"
+          trigger: "/run all tests"
           reaction: rocket
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
