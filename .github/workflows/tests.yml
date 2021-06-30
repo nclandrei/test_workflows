@@ -16,3 +16,6 @@ jobs:
       - name: Hi for all tests
         if: github.event.inputs.all_tests == 'true'
         run: echo "Wow such complication"
+      - name: Hi for all tests
+        if: github.event.inputs.all_tests == 'true'
+        run: echo "Wow no complication at all"
