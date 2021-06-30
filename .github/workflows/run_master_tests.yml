@@ -1,4 +1,4 @@
-name: Run master tests
+name: Run all tests
 on:
   pull_request:
     types: [opened]
@@ -9,12 +9,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: khan/pull-request-comment-trigger@master
+      - name: Comment trigger
         id: check
+        uses: khan/pull-request-comment-trigger@master
         with:
           trigger: "/run-all-tests"
           reaction: rocket
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-      - run: "echo Found it!"
+      - name: Run frontend tests
+        uses: benc-uk/workflow-dispatch@v1
         if: steps.check.outputs.triggered == 'true'
+        with:
+          workflow: Frontend Tests
+          token: ${{ secrets.SUPER_SECRET }}
